@@ -73,3 +73,4 @@ end
 
 gem 'pg'
 gem 'turbo-rails'
+gem 'stimulus-rails'
