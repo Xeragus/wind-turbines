@@ -1,0 +1,3 @@
+class WindTurbineReading < ApplicationRecord
+
+end
