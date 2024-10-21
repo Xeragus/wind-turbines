@@ -72,4 +72,4 @@ group :test do
 end
 
 gem 'pg'
-
+gem 'turbo-rails'
