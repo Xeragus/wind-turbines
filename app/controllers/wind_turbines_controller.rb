@@ -1,5 +1,5 @@
-class RoomsController < ApplicationController
+class WindTurbinesController < ApplicationController
   def index
-    @hehe = 'hihi'
+    @wind_turbine_readings = WindTurbineReading.order(created_at: :desc).limit(10)
   end
 end
