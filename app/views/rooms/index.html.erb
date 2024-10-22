@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-green-500 font-semibold mb-4"><%= notice %></p>
 
-<h1>Rooms</h1>
+<h1 class="text-3xl font-bold mb-6">Rooms</h1>
 
-<div id="rooms">
+<div id="rooms" class="space-y-4">
   <% @rooms.each do |room| %>
-    <%= render room %>
-    <p>
-      <%= link_to "Show this room", room %>
-    </p>
+    <div class="border p-4 rounded-lg shadow-sm bg-white">
+      <%= render room %>
+      <p class="mt-2">
+        <%= link_to "Show this room", room, class: "text-blue-500 hover:underline" %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New room", new_room_path %>
+<%= link_to "New room", new_room_path, class: "inline-block mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" %>
