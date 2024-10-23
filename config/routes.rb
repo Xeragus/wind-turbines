@@ -3,5 +3,5 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :wind_turbines, only: [:index]
+  resources :wind_turbine_readings, only: [:index]
 end

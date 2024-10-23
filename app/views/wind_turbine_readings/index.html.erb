@@ -1,0 +1,37 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Readings in the Last 3 Hours</h1>
+  <div class="overflow-x-auto">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Temp (2m)</th>
+        <th scope="col">Rel Hum (2m)</th>
+        <th scope="col">DP (2m)</th>
+        <th scope="col">WS (10m)</th>
+        <th scope="col">WS (100m)</th>
+        <th scope="col">WD (10m)</th>
+        <th scope="col">WD (100m)</th>
+        <th scope="col">WG (10m)</th>
+        <th scope="col">Energy Produced (kWh)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @wind_turbine_readings.each do |reading| %>
+        <tr>
+          <td><%= reading.time.strftime("%d-%m-%Y %H:%M") %></td>
+          <td><%= reading.temp_2m %></td>
+          <td><%= reading.relhum_2m %></td>
+          <td><%= reading.dp_2m %></td>
+          <td><%= reading.ws_10m %></td>
+          <td><%= reading.ws_100m %></td>
+          <td><%= reading.wd_10m %></td>
+          <td><%= reading.wd_100m %></td>
+          <td><%= reading.wg_10m %></td>
+          <td><%= reading.actual_power_output %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
