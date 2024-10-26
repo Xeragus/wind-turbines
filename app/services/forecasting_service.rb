@@ -14,15 +14,13 @@ class ForecastingService
       request["content-type"] = 'application/json'
       request["authorization"] = 'Bearer nixtla-tok-BWOWNYGDsqpYozfhXh11gP3dKfOcF0I48Q12CqfedOg6JhofOEDt0WF5RJVxqNKWA55vgMpbVlQnx9jb'
 
-      horizon = 1 # forecast for the next 1 hour
-
       request_body = {
         model: 'timegpt-1',
         freq: 'H',
-        fh: horizon,
+        fh: 1,
         y: WindTurbineReading.historical_time_series,
-        x: WindTurbineReading.future_exogenous_variables,
-        clean_ex_first: false,
+        x: WindTurbineReading.exogenous_variables,
+        clean_ex_first: true,
         finetune_steps: 0,
         finetune_loss: 'default'
       }

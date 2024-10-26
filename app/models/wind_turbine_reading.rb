@@ -8,15 +8,15 @@ class WindTurbineReading < ApplicationRecord
     readings = where.not(actual_power_output: nil)
 
     historical_data = readings.each_with_object({}) do |reading, hash|
-      hash[reading.time.strftime("%Y-%m-%d")] = reading.actual_power_output
+      hash[reading.time.strftime("%Y-%m-%d %H:%M")] = reading.actual_power_output
     end
 
     historical_data
   end
 
-  def self.future_exogenous_variables
+  def self.exogenous_variables
     historical_data = self.all.each_with_object({}) do |reading, hash|
-      hash[reading.time.strftime("%Y-%m-%d")] = [
+      hash[reading.time.strftime("%Y-%m-%d %H:%M")] = [
         reading.temp_2m,
         reading.relhum_2m,
         reading.dp_2m,
