@@ -8,5 +8,8 @@
   <td><%= wind_turbine_reading.wd_10m %></td>
   <td><%= wind_turbine_reading.wd_100m %></td>
   <td><%= wind_turbine_reading.wg_10m %></td>
-  <td><%= wind_turbine_reading.actual_power_output %></td>
+  <td>
+    <%= wind_turbine_reading.actual_power_output %>
+    <%= wind_turbine_reading.forecasted_power_output ? "(#{wind_turbine_reading.forecasted_power_output } forecast )" : "" %>
+  </td>
 </tr>

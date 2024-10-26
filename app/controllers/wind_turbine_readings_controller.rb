@@ -2,7 +2,7 @@ class WindTurbineReadingsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create, :add_actual_power_output]
 
   def index
-    @wind_turbine_readings = WindTurbineReading.where.not(actual_power_output: nil).order(created_at: :asc).last(3)
+    @wind_turbine_readings = WindTurbineReading.where.not(actual_power_output: nil).order(id: :asc).last(3)
     @forecasted_readings = WindTurbineReading.where(actual_power_output: nil)
                                              .where.not(forecasted_power_output: nil)
                                              .order(created_at: :asc)
@@ -22,13 +22,11 @@ class WindTurbineReadingsController < ApplicationController
 
   def forecast
     reading = WindTurbineReading.find(params[:id])
-    reading.forecasted_power_output = 4
+    ForecastingService.forecast!(reading)
 
-    if reading.save
-      render json: { message: 'Wind turbine reading successfully updated', reading: }, status: :created
-    else
-      render json: { errors: reading.errors.full_messages }, status: :unprocessable_entity
-    end
+    render json: { message: 'Wind turbine reading successfully updated', reading: }, status: :created
+  rescue StandardError => e
+    render json: { errors: reading.errors.full_messages, specific_error: e }, status: :unprocessable_entity
   end
 
   def add_actual_power_output

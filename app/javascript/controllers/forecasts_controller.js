@@ -27,13 +27,11 @@ export default class extends Controller {
         throw new Error('Network response was not ok');
       }
 
-      // Wait for 10 seconds to simulate processing
-      await new Promise(resolve => setTimeout(resolve, 10000));
-
       // Handle the response from the server (for example, update the DOM)
       const result = await response.text();
       // Assuming you want to update the results in a specific element
-      document.getElementById("forecast-results").innerHTML = result;
+      // document.getElementById("forecast-results").innerHTML = result;
+      window.location.reload();
 
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
