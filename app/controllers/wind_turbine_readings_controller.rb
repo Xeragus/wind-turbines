@@ -6,7 +6,8 @@ class WindTurbineReadingsController < ApplicationController
     @forecasted_readings = WindTurbineReading.where(actual_power_output: nil)
                                              .where.not(forecasted_power_output: nil)
                                              .order(created_at: :asc)
-    @readings_to_be_forecasted = WindTurbineReading.where(actual_power_output: nil).order(created_at: :asc)
+    @future_readings = WindTurbineReading.where(actual_power_output: nil, forecasted_power_output: nil)
+                                         .order(created_at: :asc)
   end
 
   def create

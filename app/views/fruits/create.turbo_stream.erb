@@ -1,0 +1,3 @@
+<%= turbo_stream.append 'fruits' do %>
+  <%= render partial: 'fruit', locals: { fruit: @fruit } %>
+<% end %>

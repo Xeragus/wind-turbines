@@ -7,4 +7,6 @@ Rails.application.routes.draw do
     post :forecast, on: :member
     post :add_actual_power_output, on: :member
   end
+
+  resources :fruits, only: [:index, :create]
 end

@@ -1,0 +1,14 @@
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Taste</th>
+  </tr>
+  </thead>
+  <tbody id="fruits">
+    <%= render partial: 'fruit', collection: @fruits %>
+  </tbody>
+</table>
+
+<%= turbo_stream_from 'fruits' %>

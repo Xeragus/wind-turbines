@@ -1,0 +1,32 @@
+<div class="card mt-3">
+  <h5 class="card-header">Sensors data for the next hour</h5>
+  <div class="card-body">
+    <h5 class="card-title"><td><%= future_reading.time.strftime("%d-%m-%Y %H:%M") %></td></h5>
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <strong>Temp (2m):</strong> <%= future_reading.temp_2m %><br>
+        <strong>Rel Hum (2m):</strong> <%= future_reading.relhum_2m %><br>
+        <strong>DP (2m):</strong> <%= future_reading.dp_2m %><br>
+      </div>
+      <div class="col-md-4">
+        <strong>WS (10m):</strong> <%= future_reading.ws_10m %><br>
+        <strong>WS (100m):</strong> <%= future_reading.ws_100m %><br>
+      </div>
+      <div class="col-md-4">
+        <strong>WD (10m):</strong> <%= future_reading.wd_10m %><br>
+        <strong>WD (100m):</strong> <%= future_reading.wd_100m %><br>
+        <strong>WG (10m):</strong> <%= future_reading.wg_10m %><br>
+      </div>
+    </div>
+    <a href="#"
+       class="btn btn-primary"
+       data-turbo-action="replace"
+       data-turbo-frame="forecast-results"
+       data-id="<%= future_reading.id %>"
+       data-controller="forecasts"
+       data-action="click->forecasts#forecast">
+      Forecast
+    </a>
+  </div>
+</div>

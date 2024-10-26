@@ -16,28 +16,16 @@
         <th scope="col">Energy Produced (kWh)</th>
       </tr>
       </thead>
-      <tbody>
-      <% @wind_turbine_readings.each do |reading| %>
-        <tr>
-          <td><%= reading.time.strftime("%d-%m-%Y %H:%M") %></td>
-          <td><%= reading.temp_2m %></td>
-          <td><%= reading.relhum_2m %></td>
-          <td><%= reading.dp_2m %></td>
-          <td><%= reading.ws_10m %></td>
-          <td><%= reading.ws_100m %></td>
-          <td><%= reading.wd_10m %></td>
-          <td><%= reading.wd_100m %></td>
-          <td><%= reading.wg_10m %></td>
-          <td><%= reading.actual_power_output %></td>
-        </tr>
-      <% end %>
+      <%= turbo_stream_from 'wind_turbine_readings' %>
+      <tbody id="wind_turbine_readings">
+        <%= render partial: 'wind_turbine_reading', collection: @wind_turbine_readings %>
       </tbody>
     </table>
   </div>
 
   <% @forecasted_readings.each do |reading| %>
     <div class="card">
-      <h5 class="card-header">Forecasted readings</h5>
+      <h5 class="card-header">Forecast for the next hour</h5>
       <div class="card-body">
         <h5 class="card-title"><td><%= reading.time.strftime("%d-%m-%Y %H:%M") %></td></h5>
 
@@ -63,40 +51,8 @@
     </div>
   <% end %>
 
-  <% @readings_to_be_forecasted.each do |reading| %>
-    <div class="card mt-3">
-      <h5 class="card-header">Readings to be forecasted</h5>
-      <div class="card-body">
-        <h5 class="card-title"><td><%= reading.time.strftime("%d-%m-%Y %H:%M") %></td></h5>
-
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <strong>Temp (2m):</strong> <%= reading.temp_2m %><br>
-            <strong>Rel Hum (2m):</strong> <%= reading.relhum_2m %><br>
-            <strong>DP (2m):</strong> <%= reading.dp_2m %><br>
-          </div>
-          <div class="col-md-4">
-            <strong>WS (10m):</strong> <%= reading.ws_10m %><br>
-            <strong>WS (100m):</strong> <%= reading.ws_100m %><br>
-          </div>
-          <div class="col-md-4">
-            <strong>WD (10m):</strong> <%= reading.wd_10m %><br>
-            <strong>WD (100m):</strong> <%= reading.wd_100m %><br>
-            <strong>WG (10m):</strong> <%= reading.wg_10m %><br>
-          </div>
-        </div>
-        <a href="#"
-           class="btn btn-primary"
-           data-turbo-action="replace"
-           data-turbo-frame="forecast-results"
-           data-id="<%= reading.id %>"
-           data-controller="forecasts"
-           data-action="click->forecasts#forecast">
-          Forecast
-        </a>
-      </div>
-    </div>
-  <% end %>
-
+  <%= turbo_stream_from 'future_readings' %>
+  <div id="future_readings">
+    <%= render partial: 'future_reading', collection: @future_readings %>
+  </div>
 </div>
-
